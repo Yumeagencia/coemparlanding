@@ -13,6 +13,10 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack,
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 

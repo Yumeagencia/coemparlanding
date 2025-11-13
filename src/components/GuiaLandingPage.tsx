@@ -431,6 +431,10 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedores
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -627,6 +631,12 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedores
                 className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
                 Probar Demo Gratuita
+              </button>
+              <button
+                onClick={() => scrollToSection('pricing-section')}
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              >
+                Comprar Lista
               </button>
               <button
                 onClick={onLoginClick}
