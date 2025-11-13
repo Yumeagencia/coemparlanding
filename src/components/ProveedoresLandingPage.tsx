@@ -72,7 +72,7 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack,
               />
             </div>
 
-            <div className="hidden md:flex items-center space-x-8 mx-auto">
+            <div className="hidden md:flex items-center space-x-8 ml-auto">
               <button
                 onClick={onGuiaClick}
                 className="text-gray-300 hover:text-white transition-colors font-medium"
