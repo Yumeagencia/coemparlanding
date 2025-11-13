@@ -552,22 +552,16 @@ const FAQSection = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8 mx-auto">
               <button
-                onClick={() => scrollToSection('modules-section')}
+                onClick={onGuiaClick}
                 className="text-gray-300 hover:text-white transition-colors font-medium"
               >
-                Módulos
+                Guía de Emprendimiento
               </button>
               <button
-                onClick={() => scrollToSection('pricing-section')}
-                className="text-green-500 hover:text-green-400 transition-colors font-medium"
+                onClick={onProveedoresClick}
+                className="text-gray-300 hover:text-white transition-colors font-medium"
               >
-                Comprar
-              </button>
-              <button
-                onClick={onLoginClick}
-                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg transition-all font-medium"
-              >
-                Ingresar
+                Lista de Proveedores
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}
@@ -585,25 +579,22 @@ const FAQSection = () => {
           {mobileMenuOpen && (
             <div className="md:hidden py-4 space-y-3 border-t border-gray-800">
               <button
-                onClick={() => scrollToSection('modules-section')}
+                onClick={() => {
+                  onGuiaClick?.();
+                  setMobileMenuOpen(false);
+                }}
                 className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
               >
-                Módulos
-              </button>
-              <button
-                onClick={() => scrollToSection('pricing-section')}
-                className="block w-full text-left text-green-500 hover:text-green-400 transition-colors font-medium py-2"
-              >
-                Comprar
+                Guía de Emprendimiento
               </button>
               <button
                 onClick={() => {
-                  onLoginClick();
+                  onProveedoresClick?.();
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-lg transition-all font-medium"
+                className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
               >
-                Ingresar
+                Lista de Proveedores
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}
@@ -769,402 +760,6 @@ const FAQSection = () => {
             Ingresar al Curso
           </button>
         </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="precio" className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Elije la opción que mejor encaje contigo
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Acceso de por vida. Actualizaciones periódicas.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Plan 1: Guía de Emprendimiento */}
-            <div className="bg-gray-800 rounded-2xl p-6 sm:p-8 border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Guía de Emprendimiento</h3>
-              <p className="text-gray-400 mb-6 sm:min-h-[60px]">
-                Accede a los 6 módulos completos sobre cómo empezar, rentabilizar y escalar un negocio desde cero.
-              </p>
-              <div className="mb-6">
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-2">189.000gs</div>
-                <p className="text-gray-500 text-sm">Pago único</p>
-              </div>
-              <div className="space-y-3">
-                <a
-                  href="/demo"
-                  className="block text-center text-gray-400 hover:text-yellow-400 underline text-sm mb-2"
-                >
-                  Demo de la guía
-                </a>
-                <a
-                  href="https://pago.pagopar.com/74nuk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(189000, 'PYG', 'Guía de Emprendimiento')}
-                  className="block w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Tarjeta
-                </a>
-                <a
-                  href="https://wa.me/595973327969?text=Hola!%20Quiero%20comprar%20la%20gu%C3%ADa%20de%20Emprendimiento..."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(189000, 'PYG', 'Guía de Emprendimiento')}
-                  className="block w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Transferencia
-                </a>
-              </div>
-              <a
-                href="https://wa.me/595973327969?text=Tengo%20dudas%20sobre%20la%20Gu%C3%ADa%20de%20Emprendimiento"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center text-gray-400 hover:text-white mt-4 underline text-sm"
-              >
-                ¿Dudas? Contáctanos
-              </a>
-            </div>
-
-            {/* Plan 2: Lista de Proveedores */}
-            <div className="bg-gray-800 rounded-2xl p-6 sm:p-8 border border-gray-700 hover:border-green-500 transition-all duration-300 hover:shadow-xl">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Lista de Proveedores</h3>
-              <p className="text-gray-400 mb-6 sm:min-h-[60px]">
-                Accede a más de 300 proveedores verificados en China, Brasil, CDE y aliados comerciales.
-              </p>
-              <div className="mb-6">
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-2">199.000gs</div>
-                <p className="text-gray-500 text-sm">Pago único</p>
-              </div>
-              <div className="space-y-3">
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1MoIyAhLzWRq9SDjN84cMYB0nq2O6yYh-pQHzltKpyYw/edit?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-center text-gray-400 hover:text-green-400 underline text-sm mb-2"
-                >
-                  Demo de la lista
-                </a>
-                <a
-                  href="https://pago.pagopar.com/74nui"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(199000, 'PYG', 'Lista de Proveedores')}
-                  className="block w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Tarjeta
-                </a>
-                <a
-                  href="https://wa.me/595973327969?text=Hola!%20Quiero%20comprar%20la%20Lista%20de%20Proveedores..."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(199000, 'PYG', 'Lista de Proveedores')}
-                  className="block w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Transferencia
-                </a>
-              </div>
-              <a
-                href="https://wa.me/595973327969?text=Tengo%20dudas%20sobre%20la%20Lista%20de%20Proveedores"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center text-gray-400 hover:text-white mt-4 underline text-sm"
-              >
-                ¿Dudas? Contáctanos
-              </a>
-            </div>
-
-            {/* Plan 3: Bundle - Más Popular */}
-            <div className="bg-gray-800 rounded-2xl p-6 sm:p-8 relative golden-border md:transform md:hover:scale-105 transition-all duration-300 hover:shadow-2xl">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold">
-                MÁS POPULAR
-              </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Guía + Proveedores</h3>
-              <p className="text-gray-400 mb-6 sm:min-h-[60px]">
-                Obtén acceso completo a la guía de emprendimiento y la lista de proveedores ¡Empieza con todas las herramientas necesarias!
-              </p>
-              <div className="mb-6">
-                <div className="flex items-center justify-center gap-2 mb-2 flex-wrap">
-                  <span className="text-xl sm:text-2xl text-gray-500 line-through">388.000gs</span>
-                  <span className="text-3xl sm:text-4xl font-bold text-white">299.000gs</span>
-                </div>
-                <p className="text-yellow-400 text-sm font-semibold">Ahorra 89.000gs (23% OFF)</p>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-center gap-3 sm:gap-4 mb-2 flex-wrap">
-                  <a
-                    href="/demo"
-                    className="text-gray-400 hover:text-yellow-400 underline text-sm"
-                  >
-                    Demo de la guía
-                  </a>
-                  <a
-                    href="https://docs.google.com/spreadsheets/d/1MoIyAhLzWRq9SDjN84cMYB0nq2O6yYh-pQHzltKpyYw/edit?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-green-400 underline text-sm"
-                  >
-                    Demo de la lista
-                  </a>
-                </div>
-                <a
-                  href="https://pago.pagopar.com/6zpqu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(299000, 'PYG', 'Bundle - Guía + Proveedores')}
-                  className="block w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Tarjeta
-                </a>
-                <a
-                  href="https://wa.me/595973327969?text=Hola!%20Me%20interesa%20adquirir%20la%20gu%C3%ADa%20de%20emprendimiento%20y%20la%20lista%20de%20proveedores%20en%20combo..."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(299000, 'PYG', 'Bundle - Guía + Proveedores')}
-                  className="block w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Transferencia
-                </a>
-              </div>
-              <a
-                href="https://wa.me/595973327969?text=Tengo%20dudas%20sobre%20el%20combo%20de%20Gu%C3%ADa%20%2B%20Proveedores"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center text-gray-400 hover:text-white mt-4 underline text-sm"
-              >
-                ¿Dudas? Contáctanos
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <style>{`
-          @keyframes golden-shine {
-            0% {
-              background-position: -200% center;
-            }
-            100% {
-              background-position: 200% center;
-            }
-          }
-
-          .golden-border {
-            position: relative;
-            border: 3px solid transparent;
-            background-clip: padding-box;
-          }
-
-          .golden-border::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 1rem;
-            padding: 3px;
-            background: linear-gradient(
-              90deg,
-              #d4af37 0%,
-              #ffd700 25%,
-              #ffed4e 50%,
-              #ffd700 75%,
-              #d4af37 100%
-            );
-            background-size: 200% 100%;
-            animation: golden-shine 3s linear infinite;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            z-index: -1;
-          }
-        `}</style>
-      </section>
-
-      {/* Roadmap Section */}
-      <section className="py-20 bg-gray-800 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              Lo que lograrás con esta Guía...
-            </h2>
-          </div>
-
-          <div className="max-w-4xl mx-auto relative">
-            <div className="space-y-8 relative" style={{ zIndex: 1 }}>
-              {/* Fase 1 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-blue-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-blue-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    1
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <BookOpen className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
-                      Fundamentos y Bases Legales
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Aprender todos los conceptos del emprendimiento y bases legales de forma fácil y rápida
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 2 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-purple-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-purple-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    2
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Palette className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-                      Selección y Diferenciación de Producto
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Conocer las bases para elegir un buen producto y promocionarlo de forma correcta y cómo diferenciarse de la competencia
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 3 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-green-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-green-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    3
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Users className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">
-                      Captación de Clientes y Canales de Venta
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Aprender sobre los métodos de captación de clientes y canales de venta
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 4 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-red-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-red-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    4
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-red-400 to-red-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Target className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">
-                      Proceso Logístico Completo
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Aprender sobre el proceso logístico desde la venta hasta la entrega y el cobro
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 5 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-teal-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-teal-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    5
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-teal-400 to-teal-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-teal-400 transition-colors">
-                      Red de Proveedores Exclusiva
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Contactar a uno de los +300 proveedores nacionales e internacionales para elegir un nicho
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 6 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                <div className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-amber-600 rounded-2xl p-6 border-2 border-yellow-400 transition-all duration-500 shadow-2xl shadow-yellow-500/50 animate-golden-shine">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-black font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    6
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-yellow-300 to-yellow-400 rounded-full flex items-center justify-center text-black shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Star className="w-6 h-6" />
-                  </div>
-                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-300 to-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                    META
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 drop-shadow-lg">
-                      Lanzamiento y Facturación Recurrente
-                    </h3>
-                    <p className="text-white text-base leading-relaxed drop-shadow">
-                      Montar tu primer emprendimiento para facturar +10.000.000gs de manera recurrente desde tus primeros meses
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <style>{`
-          @keyframes fade-in-up {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          .animate-fade-in-up {
-            animation: fade-in-up 0.8s ease-out forwards;
-            opacity: 0;
-          }
-
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes golden-shine {
-            0%, 100% {
-              box-shadow: 0 0 30px rgba(234, 179, 8, 0.5), 0 0 60px rgba(234, 179, 8, 0.3);
-            }
-            50% {
-              box-shadow: 0 0 40px rgba(234, 179, 8, 0.7), 0 0 80px rgba(234, 179, 8, 0.5);
-            }
-          }
-
-          .animate-golden-shine {
-            animation: golden-shine 2.5s ease-in-out infinite;
-          }
-        `}</style>
       </section>
 
       {/* FAQ Section */}

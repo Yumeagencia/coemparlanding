@@ -4,9 +4,10 @@ import { trackInitiateCheckout } from '../utils/metaPixel';
 
 interface ProveedoresLandingPageProps {
   onBack: () => void;
+  onGuiaClick?: () => void;
 }
 
-const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack }) => {
+const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack, onGuiaClick }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -69,16 +70,15 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack 
 
             <div className="hidden md:flex items-center space-x-8 mx-auto">
               <button
-                onClick={onBack}
+                onClick={onGuiaClick}
                 className="text-gray-300 hover:text-white transition-colors font-medium"
               >
-                Inicio
+                Guía de Emprendimiento
               </button>
               <button
-                onClick={() => scrollToSection('pricing-section')}
-                className="text-green-500 hover:text-green-400 transition-colors font-medium"
+                className="text-gray-300 hover:text-white transition-colors font-medium"
               >
-                Comprar
+                Lista de Proveedores
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}
@@ -95,18 +95,17 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack 
             <div className="md:hidden py-4 space-y-3 border-t border-gray-800">
               <button
                 onClick={() => {
-                  onBack();
+                  onGuiaClick?.();
                   setMobileMenuOpen(false);
                 }}
                 className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
               >
-                Inicio
+                Guía de Emprendimiento
               </button>
               <button
-                onClick={() => scrollToSection('pricing-section')}
-                className="block w-full text-left text-green-500 hover:text-green-400 transition-colors font-medium py-2"
+                className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
               >
-                Comprar
+                Lista de Proveedores
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}

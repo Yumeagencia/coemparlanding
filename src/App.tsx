@@ -81,11 +81,11 @@ function App() {
 
   // Render based on current page
   if (currentPage === 'guia') {
-    return <GuiaLandingPage onBack={handleBackToLanding} />;
+    return <GuiaLandingPage onBack={handleBackToLanding} onProveedoresClick={handleProveedoresClick} />;
   }
 
   if (currentPage === 'proveedores') {
-    return <ProveedoresLandingPage onBack={handleBackToLanding} />;
+    return <ProveedoresLandingPage onBack={handleBackToLanding} onGuiaClick={handleGuiaClick} />;
   }
 
   if (currentPage === 'module1') {

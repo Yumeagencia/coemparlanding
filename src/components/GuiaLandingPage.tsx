@@ -417,9 +417,10 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module, index, moduleRef, nextM
 
 interface GuiaLandingPageProps {
   onBack: () => void;
+  onProveedoresClick?: () => void;
 }
 
-const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack }) => {
+const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedoresClick }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -486,16 +487,15 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack }) => {
 
             <div className="hidden md:flex items-center space-x-8 mx-auto">
               <button
-                onClick={onBack}
                 className="text-gray-300 hover:text-white transition-colors font-medium"
               >
-                Inicio
+                Guía de Emprendimiento
               </button>
               <button
-                onClick={() => scrollToSection('pricing-section')}
-                className="text-green-500 hover:text-green-400 transition-colors font-medium"
+                onClick={onProveedoresClick}
+                className="text-gray-300 hover:text-white transition-colors font-medium"
               >
-                Comprar
+                Lista de Proveedores
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}
@@ -511,19 +511,18 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack }) => {
           {mobileMenuOpen && (
             <div className="md:hidden py-4 space-y-3 border-t border-gray-800">
               <button
+                className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
+              >
+                Guía de Emprendimiento
+              </button>
+              <button
                 onClick={() => {
-                  onBack();
+                  onProveedoresClick?.();
                   setMobileMenuOpen(false);
                 }}
                 className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
               >
-                Inicio
-              </button>
-              <button
-                onClick={() => scrollToSection('pricing-section')}
-                className="block w-full text-left text-green-500 hover:text-green-400 transition-colors font-medium py-2"
-              >
-                Comprar
+                Lista de Proveedores
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}
@@ -799,6 +798,182 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack }) => {
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             z-index: -1;
+          }
+        `}</style>
+      </section>
+
+      {/* Roadmap Section */}
+      <section className="py-20 bg-gray-800 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
+              Lo que lograrás con esta Guía...
+            </h2>
+          </div>
+
+          <div className="max-w-4xl mx-auto relative">
+            <div className="space-y-8 relative" style={{ zIndex: 1 }}>
+              {/* Fase 1 */}
+              <div className="group animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-blue-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-blue-500/30 group-hover:transform group-hover:-translate-y-2">
+                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    1
+                  </div>
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <div className="pt-3">
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                      Fundamentos y Bases Legales
+                    </h3>
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      Aprender todos los conceptos del emprendimiento y bases legales de forma fácil y rápida
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fase 2 */}
+              <div className="group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-purple-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-purple-500/30 group-hover:transform group-hover:-translate-y-2">
+                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    2
+                  </div>
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    <Palette className="w-6 h-6" />
+                  </div>
+                  <div className="pt-3">
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                      Selección y Diferenciación de Producto
+                    </h3>
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      Conocer las bases para elegir un buen producto y promocionarlo de forma correcta y cómo diferenciarse de la competencia
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fase 3 */}
+              <div className="group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-green-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-green-500/30 group-hover:transform group-hover:-translate-y-2">
+                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    3
+                  </div>
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    <Users className="w-6 h-6" />
+                  </div>
+                  <div className="pt-3">
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">
+                      Captación de Clientes y Canales de Venta
+                    </h3>
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      Aprender sobre los métodos de captación de clientes y canales de venta
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fase 4 */}
+              <div className="group animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-red-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-red-500/30 group-hover:transform group-hover:-translate-y-2">
+                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    4
+                  </div>
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-red-400 to-red-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    <Target className="w-6 h-6" />
+                  </div>
+                  <div className="pt-3">
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">
+                      Proceso Logístico Completo
+                    </h3>
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      Aprender sobre el proceso logístico desde la venta hasta la entrega y el cobro
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fase 5 */}
+              <div className="group animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-teal-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-teal-500/30 group-hover:transform group-hover:-translate-y-2">
+                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    5
+                  </div>
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-teal-400 to-teal-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    <Phone className="w-6 h-6" />
+                  </div>
+                  <div className="pt-3">
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-teal-400 transition-colors">
+                      Red de Proveedores Exclusiva
+                    </h3>
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      Contactar a uno de los +300 proveedores nacionales e internacionales para elegir un nicho
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fase 6 */}
+              <div className="group animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+                <div className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-amber-600 rounded-2xl p-6 border-2 border-yellow-400 transition-all duration-500 shadow-2xl shadow-yellow-500/50 animate-golden-shine">
+                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-black font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    6
+                  </div>
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-yellow-300 to-yellow-400 rounded-full flex items-center justify-center text-black shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
+                    <Star className="w-6 h-6" />
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-300 to-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                    META
+                  </div>
+                  <div className="pt-3">
+                    <h3 className="text-xl font-bold text-white mb-3 drop-shadow-lg">
+                      Lanzamiento y Facturación Recurrente
+                    </h3>
+                    <p className="text-white text-base leading-relaxed drop-shadow">
+                      Montar tu primer emprendimiento para facturar +10.000.000gs de manera recurrente desde tus primeros meses
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <style>{`
+          @keyframes fade-in-up {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+          }
+
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .animate-golden-shine {
+            animation: golden-shine 2.5s ease-in-out infinite;
           }
         `}</style>
       </section>
