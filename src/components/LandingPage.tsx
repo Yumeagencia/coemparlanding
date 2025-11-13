@@ -543,7 +543,7 @@ const FAQSection = () => {
             {/* Logo - Centered on Mobile, Left on Desktop */}
             <div className="absolute left-1/2 transform -translate-x-1/2 md:relative md:left-0 md:transform-none">
               <img
-                src="/2.png"
+                src="/3.png"
                 alt="Logo"
                 className="h-10 w-auto"
               />
@@ -610,55 +610,10 @@ const FAQSection = () => {
       {/* Main Hero Section */}
       <section className="pt-32 pb-20 bg-blue-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
-            <div className="flex justify-center">
-              <img
-                src="/guiayproveedores.png"
-                alt="Guía Completa para Emprender en Paraguay"
-                className="w-full max-w-md"
-              />
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                  Herramienta Completa para Emprender en Paraguay
-                </h3>
-                <p className="text-sm text-gray-400">Formato Textual en módulos y planillas</p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-1">
-                    <span className="text-white text-sm">✓</span>
-                  </div>
-                  <p className="text-xl text-gray-200 font-semibold">
-                    +95 Páginas de información sobre emprendimiento
-                  </p>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
-                    <span className="text-white text-sm">✓</span>
-                  </div>
-                  <p className="text-xl text-gray-200 font-semibold">
-                    +300 Proveedores de Tecnología, tendencias, textiles, accesorios y mucho más
-                  </p>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center mt-1">
-                    <span className="text-white text-sm">✓</span>
-                  </div>
-                  <p className="text-xl text-gray-200 font-semibold">
-                    Herramientas de gestión y Contactos de Aliados comerciales
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div className="text-center max-w-4xl mx-auto">
+            <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Herramienta Completa para Emprender en Paraguay
+            </h3>
             <p className="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
               Aprende las estrategias exactas que utilizamos para construir un negocio exitoso, desde los fundamentos hasta técnicas avanzadas de crecimiento y gestión para transformar una idea y ganas de crecer en un negocio rentable de forma practica.
             </p>
@@ -678,14 +633,6 @@ const FAQSection = () => {
               </div>
             </div>
 
-            <div className="mt-6 flex justify-center">
-              <button
-                onClick={() => scrollToSection('precio')}
-                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-12 py-5 rounded-xl text-xl font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                Ver Productos
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -698,7 +645,7 @@ const FAQSection = () => {
             <div className="bg-gradient-to-br from-green-900 via-gray-800 to-gray-900 rounded-3xl p-8 border-2 border-green-700 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
               <div className="flex justify-center mb-6">
                 <img
-                  src="/guiayproveedores.png"
+                  src="/proveedores.png"
                   alt="Lista de Proveedores"
                   className="w-48 h-auto"
                 />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BookOpen, Target, Palette, Users, Settings, ChevronDown, ChevronUp, Star, TrendingUp, Lightbulb, Rocket, Menu, X } from 'lucide-react';
+import { BookOpen, Target, Palette, Users, Settings, ChevronDown, ChevronUp, Star, TrendingUp, Lightbulb, Rocket, Menu, X, Phone } from 'lucide-react';
 import { trackInitiateCheckout } from '../utils/metaPixel';
 
 const modules = [
@@ -478,7 +478,7 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedores
 
             <div className="absolute left-1/2 transform -translate-x-1/2 md:relative md:left-0 md:transform-none">
               <img
-                src="/2.png"
+                src="/3.png"
                 alt="Logo"
                 className="h-10 w-auto cursor-pointer"
                 onClick={onBack}

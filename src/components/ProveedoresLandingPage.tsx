@@ -61,7 +61,7 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack,
 
             <div className="absolute left-1/2 transform -translate-x-1/2 md:relative md:left-0 md:transform-none">
               <img
-                src="/2.png"
+                src="/3.png"
                 alt="Logo"
                 className="h-10 w-auto cursor-pointer"
                 onClick={onBack}
@@ -123,7 +123,7 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack,
           <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
             <div className="flex justify-center">
               <img
-                src="/guiayproveedores.png"
+                src="/proveedores.png"
                 alt="Lista de Proveedores Paraguay"
                 className="w-full max-w-md"
               />
