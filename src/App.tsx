@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import LoginModal from './components/LoginModal';
 import LandingPage from './components/LandingPage';
+import GuiaLandingPage from './components/GuiaLandingPage';
+import ProveedoresLandingPage from './components/ProveedoresLandingPage';
 import CourseContent from './components/CourseContent';
 import Module1 from './components/Module1';
 import Module2 from './components/Module2';
@@ -11,7 +13,7 @@ import Module6 from './components/Module6';
 import HistoriaAgradecimiento from './components/HistoriaAgradecimiento';
 import ThankYouPage from './components/ThankYouPage';
 
-type Page = 'landing' | 'course' | 'demo' | 'module1' | 'module2' | 'module3' | 'module4' | 'module5' | 'module6' | 'historia' | 'gracias';
+type Page = 'landing' | 'guia' | 'proveedores' | 'course' | 'demo' | 'module1' | 'module2' | 'module3' | 'module4' | 'module5' | 'module6' | 'historia' | 'gracias';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -25,6 +27,10 @@ function App() {
     } else if (path === '/demo') {
       setCurrentPage('demo');
       setIsDemoMode(true);
+    } else if (path === '/guia' || path === '/guia-emprendimiento') {
+      setCurrentPage('guia');
+    } else if (path === '/proveedores' || path === '/lista-proveedores') {
+      setCurrentPage('proveedores');
     }
 
     const handleModuleNavigation = (event: CustomEvent) => {
@@ -52,6 +58,17 @@ function App() {
 
   const handleBackToLanding = () => {
     setCurrentPage('landing');
+    window.history.pushState({}, '', '/');
+  };
+
+  const handleGuiaClick = () => {
+    setCurrentPage('guia');
+    window.history.pushState({}, '', '/guia-emprendimiento');
+  };
+
+  const handleProveedoresClick = () => {
+    setCurrentPage('proveedores');
+    window.history.pushState({}, '', '/lista-proveedores');
   };
 
   const handleBackToCourse = () => {
@@ -63,6 +80,14 @@ function App() {
   };
 
   // Render based on current page
+  if (currentPage === 'guia') {
+    return <GuiaLandingPage onBack={handleBackToLanding} />;
+  }
+
+  if (currentPage === 'proveedores') {
+    return <ProveedoresLandingPage onBack={handleBackToLanding} />;
+  }
+
   if (currentPage === 'module1') {
     return <Module1 onBack={isDemoMode ? handleBackToDemo : handleBackToCourse} isDemo={isDemoMode} />;
   }
@@ -119,6 +144,8 @@ function App() {
       <LandingPage
         onLoginClick={() => setShowLogin(true)}
         onThankYouClick={() => setCurrentPage('gracias')}
+        onGuiaClick={handleGuiaClick}
+        onProveedoresClick={handleProveedoresClick}
       />
 
       {showLogin && (

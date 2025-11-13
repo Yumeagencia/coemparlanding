@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BookOpen, Target, Palette, Users, Settings, Phone, ChevronDown, ChevronUp, Star, TrendingUp, ArrowRight, Lightbulb, Rocket, Menu, X, Package, Truck, Building2, Briefcase, Sparkles, ShoppingBag } from 'lucide-react';
+import { BookOpen, Target, Palette, Users, Settings, ChevronDown, ChevronUp, Star, TrendingUp, Lightbulb, Rocket, Menu, X } from 'lucide-react';
 import { trackInitiateCheckout } from '../utils/metaPixel';
 
 const modules = [
@@ -415,14 +415,11 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module, index, moduleRef, nextM
   );
 };
 
-interface LandingPageProps {
-  onLoginClick: () => void;
-  onThankYouClick?: () => void;
-  onGuiaClick?: () => void;
-  onProveedoresClick?: () => void;
+interface GuiaLandingPageProps {
+  onBack: () => void;
 }
 
-const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick, onGuiaClick, onProveedoresClick }) => {
+const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -430,66 +427,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick, onGuiaClick, on
   const moduleRefs = useRef<Array<React.RefObject<HTMLDivElement>>>(
     modules.map(() => React.createRef<HTMLDivElement>())
   );
-
-const FAQSection = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqs = [
-    {
-      question: "¿Qué aprenderé en esta guía?",
-      answer: "Aprenderás la base del emprendimiento, conceptos y fundamentos, métodos de organización, métodos de captación y conversión de clientes y procesos de entrega, además de saber cómo elegir un producto y administrarse tanto económicamente cómo de tiempo, además de tener a disposición a proveedores de todo el mundo y aliados comerciales para el desarrollo empresarial."
-    },
-    {
-      question: "¿Qué resultados puedo esperar con esta guía?",
-      answer: "Aprenderás cómo tomar las decisiones necesarias para empezar, aprenderás cómo proyectarte objetivos y lograrlos, aprenderás todo lo necesario para escalar un emprendimiento a +15.000.000gs en pocos meses de forma sana y clara."
-    },
-    {
-      question: "¿Cómo accedo a la lista de proveedores e información luego de pagar?",
-      answer: "Una vez listo tu pago, recibirás tu información de acceso así cómo acceso a la lista de proveedores por el correo que proporcionaste en la información de pago en un plazo máximo de 2 días hábiles (Tiempo de entrega normal de 1h luego del pago)."
-    }
-  ];
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  return (
-    <section className="py-20 bg-gray-800">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-          Preguntas Frecuentes
-        </h2>
-
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-gray-900 rounded-xl border border-gray-700 overflow-hidden">
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-800/50 transition-colors"
-              >
-                <h3 className="text-lg font-bold text-white pr-4">
-                  {faq.question}
-                </h3>
-                {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                )}
-              </button>
-              {openIndex === index && (
-                <div className="px-6 pb-5">
-                  <p className="text-gray-300 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
   useEffect(() => {
     const handleScroll = () => {
@@ -523,7 +460,6 @@ const FAQSection = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black">
-      {/* Navigation Bar */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 transition-transform duration-300 ${
           showNavbar ? 'translate-y-0' : '-translate-y-full'
@@ -531,7 +467,6 @@ const FAQSection = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 relative">
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden text-white p-2 z-10"
@@ -540,34 +475,27 @@ const FAQSection = () => {
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
-            {/* Logo - Centered on Mobile, Left on Desktop */}
             <div className="absolute left-1/2 transform -translate-x-1/2 md:relative md:left-0 md:transform-none">
               <img
                 src="/2.png"
                 alt="Logo"
-                className="h-10 w-auto"
+                className="h-10 w-auto cursor-pointer"
+                onClick={onBack}
               />
             </div>
 
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8 mx-auto">
               <button
-                onClick={() => scrollToSection('modules-section')}
+                onClick={onBack}
                 className="text-gray-300 hover:text-white transition-colors font-medium"
               >
-                Módulos
+                Inicio
               </button>
               <button
                 onClick={() => scrollToSection('pricing-section')}
                 className="text-green-500 hover:text-green-400 transition-colors font-medium"
               >
                 Comprar
-              </button>
-              <button
-                onClick={onLoginClick}
-                className="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-lg transition-all font-medium"
-              >
-                Ingresar
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}
@@ -577,33 +505,25 @@ const FAQSection = () => {
               </button>
             </div>
 
-            {/* Spacer for mobile to keep logo centered */}
             <div className="md:hidden w-10"></div>
           </div>
 
-          {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
             <div className="md:hidden py-4 space-y-3 border-t border-gray-800">
               <button
-                onClick={() => scrollToSection('modules-section')}
+                onClick={() => {
+                  onBack();
+                  setMobileMenuOpen(false);
+                }}
                 className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
               >
-                Módulos
+                Inicio
               </button>
               <button
                 onClick={() => scrollToSection('pricing-section')}
                 className="block w-full text-left text-green-500 hover:text-green-400 transition-colors font-medium py-2"
               >
                 Comprar
-              </button>
-              <button
-                onClick={() => {
-                  onLoginClick();
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-lg transition-all font-medium"
-              >
-                Ingresar
               </button>
               <button
                 onClick={() => scrollToSection('contact-section')}
@@ -616,14 +536,13 @@ const FAQSection = () => {
         </div>
       </nav>
 
-      {/* Main Hero Section */}
       <section className="pt-32 pb-20 bg-blue-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
             <div className="flex justify-center">
               <img
-                src="/guiayproveedores.png"
-                alt="Guía Completa para Emprender en Paraguay"
+                src="/guia-libro.png"
+                alt="Guía de Emprendimiento Paraguay"
                 className="w-full max-w-md"
               />
             </div>
@@ -631,9 +550,9 @@ const FAQSection = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                  Herramienta Completa para Emprender en Paraguay
+                  Guía Completa de Emprendimiento en Paraguay
                 </h3>
-                <p className="text-sm text-gray-400">Formato Textual en módulos y planillas</p>
+                <p className="text-sm text-gray-400">Formato Textual en 6 módulos especializados</p>
               </div>
 
               <div className="space-y-4">
@@ -651,7 +570,7 @@ const FAQSection = () => {
                     <span className="text-white text-sm">✓</span>
                   </div>
                   <p className="text-xl text-gray-200 font-semibold">
-                    +300 Proveedores de Tecnología, tendencias, textiles, accesorios y mucho más
+                    Estrategias probadas para crear negocios rentables
                   </p>
                 </div>
 
@@ -660,7 +579,7 @@ const FAQSection = () => {
                     <span className="text-white text-sm">✓</span>
                   </div>
                   <p className="text-xl text-gray-200 font-semibold">
-                    Herramientas de gestión y Contactos de Aliados comerciales
+                    Herramientas de gestión y planificación estratégica
                   </p>
                 </div>
               </div>
@@ -669,7 +588,7 @@ const FAQSection = () => {
 
           <div className="text-center max-w-4xl mx-auto">
             <p className="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
-              Aprende las estrategias exactas que utilizamos para construir un negocio exitoso, desde los fundamentos hasta técnicas avanzadas de crecimiento y gestión para transformar una idea y ganas de crecer en un negocio rentable de forma practica.
+              Aprende las estrategias exactas para construir un negocio exitoso desde los fundamentos hasta técnicas avanzadas de crecimiento, gestión y escalabilidad.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -689,109 +608,60 @@ const FAQSection = () => {
 
             <div className="mt-6 flex justify-center">
               <button
-                onClick={() => scrollToSection('precio')}
-                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-12 py-5 rounded-xl text-xl font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                onClick={() => window.location.href = '/demo'}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
-                Ver Productos
+                Probar Demo Gratuita
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Product Sections */}
-      <section className="py-20 bg-gray-900">
+      <section id="modules-section" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 mb-20">
-            {/* Lista de Proveedores Section */}
-            <div className="bg-gradient-to-br from-green-900 via-gray-800 to-gray-900 rounded-3xl p-8 border-2 border-green-700 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
-              <div className="flex justify-center mb-6">
-                <img
-                  src="/guiayproveedores.png"
-                  alt="Lista de Proveedores"
-                  className="w-48 h-auto"
-                />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4 text-center">Lista de Proveedores</h3>
-              <p className="text-gray-300 text-center mb-6 leading-relaxed">
-                Accede a más de 350 proveedores verificados en China, Brasil, CDE y 15+ aliados comerciales para desarrollo empresarial.
-              </p>
-              <div className="text-center">
-                <button
-                  onClick={onProveedoresClick}
-                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Ver Más Información
-                </button>
-              </div>
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Contenido Completo del Curso
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              6 Módulos educativos pensados estratégicamente para llevarte desde la idea inicial hasta un negocio próspero y escalable en Paraguay.
+            </p>
+          </div>
 
-            {/* Guía de Emprendimiento Section */}
-            <div className="bg-gradient-to-br from-blue-900 via-gray-800 to-gray-900 rounded-3xl p-8 border-2 border-blue-700 hover:border-blue-500 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20">
-              <div className="flex justify-center mb-6">
-                <img
-                  src="/guia-libro.png"
-                  alt="Guía de Emprendimiento"
-                  className="w-48 h-auto"
-                />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4 text-center">Guía de Emprendimiento</h3>
-              <p className="text-gray-300 text-center mb-6 leading-relaxed">
-                +95 páginas de información en 6 módulos completos sobre cómo empezar, rentabilizar y escalar un negocio desde cero.
-              </p>
-              <div className="text-center">
-                <button
-                  onClick={onGuiaClick}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Ver Más Información
-                </button>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {modules.map((module, index) => (
+              <ModuleCard
+                key={module.id}
+                module={module}
+                index={index}
+                moduleRef={moduleRefs.current[index]}
+                nextModuleRef={index < modules.length - 1 ? moduleRefs.current[index + 1] : undefined}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Already Paid Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 border-t border-blue-700">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-8">
-            ¿Ya hiciste tu pago? Ingresa aquí
-          </h2>
-          <p className="text-blue-100 mb-8 text-lg">
-            Accede a todo el contenido del curso con tus credenciales
-          </p>
-
-          <button
-            onClick={onLoginClick}
-            className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-          >
-            Ingresar al Curso
-          </button>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="precio" className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="pricing-section" className="py-20 bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Elije la opción que mejor encaje contigo
+              Accede a la Guía de Emprendimiento
             </h2>
             <p className="text-gray-400 text-lg">
               Acceso de por vida. Actualizaciones periódicas.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Plan 1: Guía de Emprendimiento */}
-            <div className="bg-gray-800 rounded-2xl p-6 sm:p-8 border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Guía de Emprendimiento</h3>
-              <p className="text-gray-400 mb-6 sm:min-h-[60px]">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl">
+              <h3 className="text-2xl font-bold text-white mb-4">Guía de Emprendimiento</h3>
+              <p className="text-gray-400 mb-6">
                 Accede a los 6 módulos completos sobre cómo empezar, rentabilizar y escalar un negocio desde cero.
               </p>
               <div className="mb-6">
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-2">189.000gs</div>
+                <div className="text-4xl font-bold text-white mb-2">189.000gs</div>
                 <p className="text-gray-500 text-sm">Pago único</p>
               </div>
               <div className="space-y-3">
@@ -830,72 +700,23 @@ const FAQSection = () => {
               </a>
             </div>
 
-            {/* Plan 2: Lista de Proveedores */}
-            <div className="bg-gray-800 rounded-2xl p-6 sm:p-8 border border-gray-700 hover:border-green-500 transition-all duration-300 hover:shadow-xl">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Lista de Proveedores</h3>
-              <p className="text-gray-400 mb-6 sm:min-h-[60px]">
-                Accede a más de 300 proveedores verificados en China, Brasil, CDE y aliados comerciales.
-              </p>
-              <div className="mb-6">
-                <div className="text-3xl sm:text-4xl font-bold text-white mb-2">199.000gs</div>
-                <p className="text-gray-500 text-sm">Pago único</p>
-              </div>
-              <div className="space-y-3">
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1MoIyAhLzWRq9SDjN84cMYB0nq2O6yYh-pQHzltKpyYw/edit?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-center text-gray-400 hover:text-green-400 underline text-sm mb-2"
-                >
-                  Demo de la lista
-                </a>
-                <a
-                  href="https://pago.pagopar.com/74nui"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(199000, 'PYG', 'Lista de Proveedores')}
-                  className="block w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Tarjeta
-                </a>
-                <a
-                  href="https://wa.me/595973327969?text=Hola!%20Quiero%20comprar%20la%20Lista%20de%20Proveedores..."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(199000, 'PYG', 'Lista de Proveedores')}
-                  className="block w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-3 rounded-lg text-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Comprar con Transferencia
-                </a>
-              </div>
-              <a
-                href="https://wa.me/595973327969?text=Tengo%20dudas%20sobre%20la%20Lista%20de%20Proveedores"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center text-gray-400 hover:text-white mt-4 underline text-sm"
-              >
-                ¿Dudas? Contáctanos
-              </a>
-            </div>
-
-            {/* Plan 3: Bundle - Más Popular */}
-            <div className="bg-gray-800 rounded-2xl p-6 sm:p-8 relative golden-border md:transform md:hover:scale-105 transition-all duration-300 hover:shadow-2xl">
+            <div className="bg-gray-800 rounded-2xl p-8 relative golden-border md:transform md:hover:scale-105 transition-all duration-300 hover:shadow-2xl">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold">
-                MÁS POPULAR
+                MEJOR OFERTA
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Guía + Proveedores</h3>
-              <p className="text-gray-400 mb-6 sm:min-h-[60px]">
-                Obtén acceso completo a la guía de emprendimiento y la lista de proveedores ¡Empieza con todas las herramientas necesarias!
+              <h3 className="text-2xl font-bold text-white mb-4">Guía + Proveedores</h3>
+              <p className="text-gray-400 mb-6">
+                Obtén acceso completo a la guía de emprendimiento y la lista de proveedores.
               </p>
               <div className="mb-6">
                 <div className="flex items-center justify-center gap-2 mb-2 flex-wrap">
-                  <span className="text-xl sm:text-2xl text-gray-500 line-through">388.000gs</span>
-                  <span className="text-3xl sm:text-4xl font-bold text-white">299.000gs</span>
+                  <span className="text-2xl text-gray-500 line-through">388.000gs</span>
+                  <span className="text-4xl font-bold text-white">299.000gs</span>
                 </div>
                 <p className="text-yellow-400 text-sm font-semibold">Ahorra 89.000gs (23% OFF)</p>
               </div>
               <div className="space-y-3">
-                <div className="flex justify-center gap-3 sm:gap-4 mb-2 flex-wrap">
+                <div className="flex justify-center gap-4 mb-2 flex-wrap">
                   <a
                     href="/demo"
                     className="text-gray-400 hover:text-yellow-400 underline text-sm"
@@ -982,195 +803,6 @@ const FAQSection = () => {
         `}</style>
       </section>
 
-      {/* Roadmap Section */}
-      <section className="py-20 bg-gray-800 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              Lo que lograrás con esta Guía...
-            </h2>
-          </div>
-
-          <div className="max-w-4xl mx-auto relative">
-            <div className="space-y-8 relative" style={{ zIndex: 1 }}>
-              {/* Fase 1 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-blue-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-blue-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    1
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <BookOpen className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
-                      Fundamentos y Bases Legales
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Aprender todos los conceptos del emprendimiento y bases legales de forma fácil y rápida
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 2 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-purple-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-purple-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    2
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Palette className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-                      Selección y Diferenciación de Producto
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Conocer las bases para elegir un buen producto y promocionarlo de forma correcta y cómo diferenciarse de la competencia
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 3 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-green-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-green-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    3
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Users className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">
-                      Captación de Clientes y Canales de Venta
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Aprender sobre los métodos de captación de clientes y canales de venta
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 4 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-red-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-red-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    4
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-red-400 to-red-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Target className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">
-                      Proceso Logístico Completo
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Aprender sobre el proceso logístico desde la venta hasta la entrega y el cobro
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 5 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-                <div className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 group-hover:border-teal-500 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-teal-500/30 group-hover:transform group-hover:-translate-y-2">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    5
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-teal-400 to-teal-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-teal-400 transition-colors">
-                      Red de Proveedores Exclusiva
-                    </h3>
-                    <p className="text-gray-300 text-base leading-relaxed">
-                      Contactar a uno de los +300 proveedores nacionales e internacionales para elegir un nicho
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fase 6 */}
-              <div className="group animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                <div className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-amber-600 rounded-2xl p-6 border-2 border-yellow-400 transition-all duration-500 shadow-2xl shadow-yellow-500/50 animate-golden-shine">
-                  <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-black font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    6
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-yellow-300 to-yellow-400 rounded-full flex items-center justify-center text-black shadow-lg group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Star className="w-6 h-6" />
-                  </div>
-                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-300 to-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                    META
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="text-xl font-bold text-white mb-3 drop-shadow-lg">
-                      Lanzamiento y Facturación Recurrente
-                    </h3>
-                    <p className="text-white text-base leading-relaxed drop-shadow">
-                      Montar tu primer emprendimiento para facturar +10.000.000gs de manera recurrente desde tus primeros meses
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <style>{`
-          @keyframes fade-in-up {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          .animate-fade-in-up {
-            animation: fade-in-up 0.8s ease-out forwards;
-            opacity: 0;
-          }
-
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes golden-shine {
-            0%, 100% {
-              box-shadow: 0 0 30px rgba(234, 179, 8, 0.5), 0 0 60px rgba(234, 179, 8, 0.3);
-            }
-            50% {
-              box-shadow: 0 0 40px rgba(234, 179, 8, 0.7), 0 0 80px rgba(234, 179, 8, 0.5);
-            }
-          }
-
-          .animate-golden-shine {
-            animation: golden-shine 2.5s ease-in-out infinite;
-          }
-        `}</style>
-      </section>
-
-      {/* FAQ Section */}
-      <FAQSection />
-
-      {/* Doubts Section */}
       <section id="contact-section" className="py-16 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-8">
@@ -1198,4 +830,4 @@ const FAQSection = () => {
   );
 };
 
-export default LandingPage;
+export default GuiaLandingPage;
