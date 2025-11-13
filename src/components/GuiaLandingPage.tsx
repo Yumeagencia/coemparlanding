@@ -418,9 +418,10 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module, index, moduleRef, nextM
 interface GuiaLandingPageProps {
   onBack: () => void;
   onProveedoresClick?: () => void;
+  onLoginClick?: () => void;
 }
 
-const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedoresClick }) => {
+const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedoresClick, onLoginClick }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -503,6 +504,12 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedores
               >
                 Contacto
               </button>
+              <button
+                onClick={onLoginClick}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-2 rounded-lg transition-all font-medium"
+              >
+                Ingresar
+              </button>
             </div>
 
             <div className="md:hidden w-10"></div>
@@ -529,6 +536,15 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedores
                 className="block w-full text-left text-gray-300 hover:text-white transition-colors font-medium py-2"
               >
                 Contacto
+              </button>
+              <button
+                onClick={() => {
+                  onLoginClick?.();
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg transition-all font-medium"
+              >
+                Ingresar
               </button>
             </div>
           )}
@@ -605,12 +621,18 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedores
               </div>
             </div>
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
               <button
                 onClick={() => window.location.href = '/demo'}
-                className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
                 Probar Demo Gratuita
+              </button>
+              <button
+                onClick={onLoginClick}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              >
+                Ingresar
               </button>
             </div>
           </div>

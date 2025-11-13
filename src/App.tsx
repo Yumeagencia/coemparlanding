@@ -81,7 +81,17 @@ function App() {
 
   // Render based on current page
   if (currentPage === 'guia') {
-    return <GuiaLandingPage onBack={handleBackToLanding} onProveedoresClick={handleProveedoresClick} />;
+    return (
+      <>
+        <GuiaLandingPage onBack={handleBackToLanding} onProveedoresClick={handleProveedoresClick} onLoginClick={() => setShowLogin(true)} />
+        {showLogin && (
+          <LoginModal
+            onClose={() => setShowLogin(false)}
+            onLoginSuccess={handleLoginSuccess}
+          />
+        )}
+      </>
+    );
   }
 
   if (currentPage === 'proveedores') {
