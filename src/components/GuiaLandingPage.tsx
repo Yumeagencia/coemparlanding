@@ -633,12 +633,6 @@ const GuiaLandingPage: React.FC<GuiaLandingPageProps> = ({ onBack, onProveedores
                 Probar Demo Gratuita
               </button>
               <button
-                onClick={() => scrollToSection('pricing-section')}
-                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                Comprar Lista
-              </button>
-              <button
                 onClick={onLoginClick}
                 className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >

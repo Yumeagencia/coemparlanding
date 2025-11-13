@@ -177,7 +177,7 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack,
               Accede a una red completa de proveedores confiables y aliados comerciales que te ayudarán a hacer crecer tu negocio de manera efectiva y rentable.
             </p>
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
               <a
                 href="https://docs.google.com/spreadsheets/d/1MoIyAhLzWRq9SDjN84cMYB0nq2O6yYh-pQHzltKpyYw/edit?usp=sharing"
                 target="_blank"
@@ -186,6 +186,12 @@ const ProveedoresLandingPage: React.FC<ProveedoresLandingPageProps> = ({ onBack,
               >
                 Probar Demo Gratuita
               </a>
+              <button
+                onClick={() => scrollToSection('pricing-section')}
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              >
+                Comprar Lista
+              </button>
             </div>
           </div>
         </div>
